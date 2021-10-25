@@ -1,0 +1,12 @@
+.apartment-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 3fr));
+  grid-gap: 20px;
+  width: 100%;
+  padding: 20px 50px;
+}
+@media (max-width: 540px) {
+  .apartment-cards {
+    padding: 20px 0px;
+  }
+}

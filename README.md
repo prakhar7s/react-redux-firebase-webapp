@@ -1,2 +1,0 @@
-# react-redux-firebase-webapp
- 
