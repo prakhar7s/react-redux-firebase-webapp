@@ -2,7 +2,6 @@ import "./apartment.css";
 
 import { redirect } from "../../store/actions/actions";
 import { connect } from "react-redux";
-import { useEffect } from "react";
 
 const Apartment = (props) => {
   const {
@@ -18,22 +17,9 @@ const Apartment = (props) => {
 
   const formattedDate = Date(availableFrom).substr(4, 6);
 
-  useEffect(() => {
-    // for back button
-    window.location.hash = "no-back-button";
-
-    // Again because Google Chrome doesn't insert
-    // the first hash into the history
-    window.location.hash = "Again-No-back-button";
-
-    window.onhashchange = function () {
-      window.location.hash = "";
-    };
-  }, []);
   return (
     <div
       onClick={() => {
-        localStorage.setItem("isDetailedView", true);
         props.redirect(`/all/${id}`);
       }}
       className="apartment-card"

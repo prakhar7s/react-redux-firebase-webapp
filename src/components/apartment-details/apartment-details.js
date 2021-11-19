@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
+import { redirect } from "../../store/actions/actions";
 import Apartment from "../apartment/apartment";
 import Loader from "../loader/Loader";
 
@@ -25,6 +26,18 @@ const ApartmentDetails = (props) => {
 
   return (
     <div className="container d-flex justify-content-center h-100 w-100">
+      <span
+        style={{
+          cursor: "pointer",
+        }}
+        className="material-icons icon-size rounded-circle my-4 mx-2"
+        onClick={() => {
+          props.redirect(null);
+          props.history.push("/");
+        }}
+      >
+        chevron_left
+      </span>
       {apartment ? <Apartment {...apartment} isSingle /> : <Loader />}
     </div>
   );
@@ -36,8 +49,14 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDisptachToProps = (dispatch) => {
+  return {
+    redirect: (apartmentId) => dispatch(redirect(apartmentId)),
+  };
+};
+
 export default compose(
-  connect(mapStateToProps, null),
+  connect(mapStateToProps, mapDisptachToProps),
   firestoreConnect([
     {
       collection: "city",

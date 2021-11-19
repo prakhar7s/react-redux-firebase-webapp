@@ -12,10 +12,7 @@ import { redirect } from "../../store/actions/actions";
 class Aapartments extends Component {
   render() {
     const { apartments } = this.props;
-    if (
-      this.props.redirectTo &&
-      JSON.parse(localStorage.getItem("isDetailedView"))
-    ) {
+    if (this.props.redirectTo) {
       return <Redirect to={this.props.redirectTo} />;
     }
 
