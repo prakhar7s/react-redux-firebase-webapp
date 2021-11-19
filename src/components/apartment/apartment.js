@@ -1,14 +1,52 @@
 import "./apartment.css";
 
+import { redirect } from "../../store/actions/actions";
+import { connect } from "react-redux";
+import { useEffect } from "react";
+
 const Apartment = (props) => {
-  const { img, priceRange, tags, address, savesUpto, availableFrom } = props;
+  const {
+    img,
+    priceRange,
+    tags,
+    address,
+    id,
+    savesUpto,
+    availableFrom,
+    isSingle,
+  } = props;
 
   const formattedDate = Date(availableFrom).substr(4, 6);
 
+  useEffect(() => {
+    // for back button
+    window.location.hash = "no-back-button";
+
+    // Again because Google Chrome doesn't insert
+    // the first hash into the history
+    window.location.hash = "Again-No-back-button";
+
+    window.onhashchange = function () {
+      window.location.hash = "";
+    };
+  }, []);
   return (
-    <div className="apartment-card">
+    <div
+      onClick={() => {
+        localStorage.setItem("isDetailedView", true);
+        props.redirect(`/all/${id}`);
+      }}
+      className="apartment-card"
+    >
       <div className="image position-relative overflow-hidden">
-        <img src={img} alt="apartment view" className="rounded" />
+        <img
+          src={img}
+          alt="apartment view"
+          className="rounded"
+          style={{
+            height: isSingle ? "340px" : "190px",
+          }}
+        />
         <div className="position-absolute top-50 w-100 px-2 d-flex justify-content-between btn-controls">
           <span className="material-icons icon-size rounded-circle">
             chevron_left
@@ -56,4 +94,10 @@ const Apartment = (props) => {
   );
 };
 
-export default Apartment;
+const mapDisptachToProps = (dispatch) => {
+  return {
+    redirect: (apartmentId) => dispatch(redirect(apartmentId)),
+  };
+};
+
+export default connect(null, mapDisptachToProps)(Apartment);
