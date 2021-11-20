@@ -60,13 +60,13 @@ export default compose(
   firestoreConnect([
     {
       collection: "city",
-      doc: "mUYWZuKZD09ZGo4flvCm",
+      doc: "SSX77pJNAU5wvOIwECnW",
       storeAs: "catlogue",
 
       subcollections: [
         {
           collection: "locality",
-          doc: "a9OhS5nl3TZSVsUpSXaF",
+          doc: "yqnMZNXH2IRG8TVxw694",
           subcollections: [
             {
               collection: "catalogue",
